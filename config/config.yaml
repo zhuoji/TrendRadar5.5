@@ -46,6 +46,14 @@ platforms:
 
   - id: "xueqiu"
     name: "❄️ 雪球热帖"     # [情绪反指] 重点观察散户对“中际旭创（恐慌吗？）”和“拓斯达（亢奋吗？）”的讨论。人声鼎沸时要卖，哀鸿遍野时要买。
+  - id: "weibo"
+      name: "微博"         # 舆情发酵地
+  - id: "toutiao"
+      name: "今日头条"     # 算法推荐风向
+  - id: "36kr"
+      name: "36氪"         # 一级市场与科技
+  - id: "huxiu"
+      name: "虎嗅"         # 深度商业评论
 
 # ===============================================================
 # 3. 数据源 - RSS 订阅
@@ -122,7 +130,7 @@ rss:
 #    • 适用场景：避免重复信息干扰
 # ===============================================================
 report:
-  mode: "current"                     # 可选: daily | current | incremental
+  mode: "daily"                     # 可选: daily | current | incremental
   display_mode: "keyword"             # 分组维度: keyword | platform
                                       # keyword: 按关键词分组显示（默认）
                                       # platform: 按平台/来源分组显示
@@ -154,12 +162,11 @@ display:
   # 注意：区域需同时满足两个条件才会显示：
   #   1. 在此列表中
   #   2. 下方 regions 中对应开关为 true
-  region_order:
-    - new_items                       # 1️⃣ 新增热点区域
-    - hotlist                         # 2️⃣ 热榜区域（关键词匹配）
-    - rss                             # 3️⃣ RSS 订阅区域
-    - standalone                      # 4️⃣ 独立展示区
-    - ai_analysis                     # 5️⃣ AI 分析区域
+    region_order:
+    - ai_analysis
+    - new_items
+    - hotlist
+    - rss
 
   # 推送区域开关
   # 控制各区域是否启用（配合 region_order 使用）
@@ -326,7 +333,7 @@ ai:
   # 完整列表: https://docs.litellm.ai/docs/providers
   # 如果你对于看英文文档比较头疼，那么可以点击页面右下角的 【Ask AI】 ,用中文询问怎么配置 
   
-  model: "deepseek/deepseek-chat"
+  model: "gemini/gemini-1.5-pro"
 
   api_key: ""                       # API Key（建议使用环境变量 AI_API_KEY）
   
@@ -482,9 +489,9 @@ advanced:
   # 排序权重（用于重新排序不同平台的热搜）
   # 合起来等于 1
   weight:
-    rank: 0.6                         # 排名权重
+    rank: 0.5                         # 排名权重
     frequency: 0.3                    # 频次权重
-    hotness: 0.1                      # 热度权重
+    hotness: 0.2                      # 热度权重
 
   # 多账号限制
   max_accounts_per_channel: 3         # 每个渠道最大账号数量
